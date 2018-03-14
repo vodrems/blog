@@ -11,8 +11,11 @@
     <nav class="navbar navbar-default">
         <!-- Содержимое Navbar -->
     </nav>
+    <div class="row">
+        <div class="col-md-12">
+            @yield('content')
+        </div>
+    </div>
 </div>
-
-@yield('content')
 </body>
 </html>

@@ -41,8 +41,9 @@ Route::post('/task', function (Request $request) {
 });
 
 Route::delete('/task/{task}', function (\App\Task $task) {
-    dump(task);
-    echo 'delete tasks';
+    $task->delete();
+
+    return redirect('/');
 });
 
 
