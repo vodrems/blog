@@ -13,6 +13,10 @@
     </nav>
     <div class="row">
         <div class="col-md-12">
+            @if (session('msg'))
+                {{ session('msg') }}
+            @endif
+
             @yield('content')
         </div>
     </div>

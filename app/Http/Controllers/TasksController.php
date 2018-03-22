@@ -17,7 +17,7 @@ class TasksController extends Controller
      */
     public function index(Task $task)
     {
-        $tasks = $task->orderBy('created_at', 'asc')->get();
+        $tasks = $task->orderBy('created_at', 'desc')->get();
 
         return view('tasks', [
             'tasks' => $tasks
@@ -43,6 +43,8 @@ class TasksController extends Controller
     public function store(SaveTask $request)
     {
         Auth::user()->tasks()->create($request->all());
+
+        return redirect()->route('tasks.index')->with('msg', 'Your task have saved!');
     }
 
     /**
@@ -90,8 +92,8 @@ class TasksController extends Controller
      */
     public function destroy(DestroyTask $request, Task $task)
     {
-        //$task->delete();
+        $task->delete();
 
-        //return redirect('/');
+        return redirect()->route('tasks.index')->with('msg', 'Your task have deleted!');
     }
 }

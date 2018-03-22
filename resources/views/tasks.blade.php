@@ -33,6 +33,7 @@
                                 </td>
 
                                 <td>
+                                    @can('delete', $task)
                                     <form action="{{ url('tasks/'.$task->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
@@ -41,6 +42,7 @@
                                             <i class="fa fa-trash"></i> Удалить
                                         </button>
                                     </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
@@ -51,7 +53,7 @@
     @endif
 
     <!-- Форма новой задачи -->
-        <form action="{{ url('task') }}" method="POST" class="form-horizontal">
+        <form action="{{ route('tasks.store') }}" method="POST" class="form-horizontal">
         {{ csrf_field() }}
 
         <!-- Имя задачи -->

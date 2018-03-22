@@ -17,7 +17,7 @@ class DestroyTask extends FormRequest
      */
     public function authorize()
     {
-        dd(Auth::user()->can('delete', $this->route('task')));
+        return Auth::user()->can('delete', $this->route('task'));
     }
 
     /**
