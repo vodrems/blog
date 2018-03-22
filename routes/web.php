@@ -11,26 +11,8 @@
 |
 */
 
-use Illuminate\Http\Request;
-
-Route::get('/', function () {
-    $tasks = \App\Task::orderBy('created_at', 'asc')->get();
-
-    return view('tasks', [
-        'tasks' => $tasks
-    ]);
+Route::group(['middleware' => ['web', 'auth']], function () {
+    Route::resource('/tasks', 'TasksController');
 });
-
-Route::post('/task', 'TaskController@save');
-
-Route::delete('/task/{task}', function (\App\Task $task) {
-    $task->delete();
-
-    return redirect('/');
-});
-
-
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

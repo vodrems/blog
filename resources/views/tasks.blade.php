@@ -33,7 +33,7 @@
                                 </td>
 
                                 <td>
-                                    <form action="{{ url('task/'.$task->id) }}" method="POST">
+                                    <form action="{{ url('tasks/'.$task->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
 
