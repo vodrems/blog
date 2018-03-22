@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegUser;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,11 +28,12 @@ class LoginController extends Controller
         return view('auth.register');
     }
 
-    public function reg(Request $request)
+    public function reg(RegUser $request)
     {
         $request['password'] = bcrypt($request['password']);
         User::create($request->except(['_token']));
-        return response('registration page');
+
+        return redirect()->route('loginForm')->with('msg', 'You have successfully registered! Please log in!');
     }
 
     public function logout()
