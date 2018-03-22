@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/', function () {
+    return redirect('login/');
+});
+
 Route::group(['middleware' => ['web', 'auth']], function () {
     Route::resource('/tasks', 'TasksController');
 });
