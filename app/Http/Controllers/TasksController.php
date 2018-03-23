@@ -7,18 +7,24 @@ use App\Http\Requests\SaveTask;
 use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\TaskRepositoryInterface;
 
 class TasksController extends Controller
 {
+    private $tasks;
+
+    public function __construct(TaskRepositoryInterface $tasks) {
+        $this->tasks = $tasks;
+    }
+
     /**
      * @param Task $task
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Task $task)
+    public function index()
     {
-
-        $tasks = $task->orderBy('created_at', 'desc')->get();
+        $tasks = $this->tasks->all();
 
         return view('tasks', [
             'tasks' => $tasks
@@ -43,7 +49,7 @@ class TasksController extends Controller
      */
     public function store(SaveTask $request)
     {
-        Auth::user()->tasks()->create($request->all());
+        $this->tasks->store($request->all());
 
         return redirect()->route('tasks.index')->with('msg', 'Your task have saved!');
     }
