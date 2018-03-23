@@ -14,6 +14,8 @@
                 <li><a href="{{ route('regForm') }}">Registration</a></li>
             @endif
             @if(Auth::check())
+            <li><a href="{{ route('tasks.index') }}">All Tasks</a></li>
+            <li><a href="{{ route('tasks.create') }}">Create Task</a></li>
             <li>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf

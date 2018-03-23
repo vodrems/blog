@@ -32,14 +32,14 @@ class TasksController extends Controller
      */
     public function create()
     {
-        //
+        return view('tasks.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param SaveTask $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(SaveTask $request)
     {
