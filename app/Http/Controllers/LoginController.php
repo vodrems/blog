@@ -33,7 +33,7 @@ class LoginController extends Controller
         $request['password'] = bcrypt($request['password']);
         User::create($request->except(['_token']));
 
-        return redirect()->route('loginForm')->with('msg', 'You have successfully registered! Please log in!');
+        return redirect()->route('login')->with('msg', 'You have successfully registered! Please log in!');
     }
 
     public function logout()

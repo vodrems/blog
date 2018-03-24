@@ -10,7 +10,7 @@
     <nav class="navbar navbar-default">
         <ul>
             @if(!Auth::check())
-                <li><a href="{{ route('loginForm') }}">Login</a></li>
+                <li><a href="{{ route('login') }}">Login</a></li>
                 <li><a href="{{ route('regForm') }}">Registration</a></li>
             @endif
             @if(Auth::check())
