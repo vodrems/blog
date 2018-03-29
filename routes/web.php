@@ -12,14 +12,14 @@
 */
 
 Route::get('/', function () {
-    return redirect('login/');
+    return redirect()->route('login');
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
     Route::resource('/tasks', 'TasksController');
 });
 
-Route::get('login', 'LoginController@showLoginForm')->name('loginForm');
+Route::get('login', 'LoginController@showLoginForm')->name('login');
 Route::post('login', 'LoginController@login')->name('auth');
 Route::get('reg', 'LoginController@showRegForm')->name('regForm');
 Route::post('reg', 'LoginController@reg')->name('reg');
