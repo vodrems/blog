@@ -31,4 +31,17 @@ class TaskRepository implements TaskRepositoryInterface {
     public function store(array $data) {
         Auth::user()->tasks()->create($data);
     }
+
+    /**
+     * Show task on id
+     *
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function find(int $id) {
+        $task = Task::findOrFail($id);
+
+        return $task;
+    }
 }

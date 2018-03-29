@@ -22,19 +22,24 @@
                     @foreach ($tasks as $task)
                         <tr>
                             <td class="table-text">
-                                <div>{{ $task->name }}</div>
+                                <div>
+                                    {{ $task->name }}
+                                </div>
                             </td>
 
                             <td>
                                 @can('delete', $task)
-                                <form action="{{ url('tasks/'.$task->id) }}" method="POST">
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
+                                    <form action="{{ url('tasks/'.$task->id) }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
 
-                                    <button type="submit" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i> Delete
-                                    </button>
-                                </form>
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fa fa-trash"></i> Delete
+                                        </button>
+                                    </form>
+                                @endcan
+                                @can('update', $task)
+                                    <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-primary">Edit</a>
                                 @endcan
                             </td>
                         </tr>

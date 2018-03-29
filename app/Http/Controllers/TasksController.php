@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DestroyTask;
 use App\Http\Requests\SaveTask;
+use App\Http\Requests\UpdateTask;
 use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -71,9 +72,18 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        //
+        $task = $this->tasks->find($id);
+
+        if (Auth::user()->can('update', $task)) {
+            return view('tasks.create', [
+                'task' => $task
+            ]);
+        } else {
+            return redirect()->route('tasks.index')->with('msg', 'Access denied!');
+        }
+
     }
 
     /**

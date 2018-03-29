@@ -21,4 +21,13 @@ interface TaskRepositoryInterface {
      * @return mixed
      */
     public function store(array $data);
+
+    /**
+     * Show task on id
+     *
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function find(int $id);
 }
