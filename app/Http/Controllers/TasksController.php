@@ -75,12 +75,11 @@ class TasksController extends Controller
     public function edit(int $id)
     {
         $task = $this->tasks->find($id);
-
         if (Auth::user()->can('update', $task)) {
-            return view('tasks.create', [
+            return view('tasks.edit', [
                 'task' => $task
             ]);
-        } else {
+       } else {
             return redirect()->route('tasks.index')->with('msg', 'Access denied!');
         }
 
@@ -93,9 +92,11 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTask $request, $id)
     {
-        //
+       if ($this->tasks->find($id)->update($request->all())) {
+            return redirect()->route('tasks.index')->with('msg', 'Task has updated!');
+        }
     }
 
     /**
