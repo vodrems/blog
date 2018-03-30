@@ -37,4 +37,13 @@ interface BaseRepositoryInterface {
      * @return mixed
      */
     public function update(int $id, array $newData);
+
+    /**
+     * Delete on id
+     *
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function delete(int $id);
 }

@@ -90,4 +90,18 @@ abstract class BaseRepository implements BaseRepositoryInterface {
         return $model->update($newData);
     }
 
+    /**
+     * Delete on id
+     *
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function delete(int $id)
+    {
+        $model = $this->model->findOrFail($id);
+
+        return $model->delete();
+    }
+
 }

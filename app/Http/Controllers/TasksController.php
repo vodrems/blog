@@ -51,6 +51,7 @@ class TasksController extends Controller
      * Store a newly created resource in storage.
      *
      * @param SaveTask $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(SaveTask $request)
@@ -122,7 +123,7 @@ class TasksController extends Controller
      */
     public function destroy(DestroyTask $request, Task $task)
     {
-        $task->delete();
+        $this->tasks->delete($task->id);
 
         return redirect()->route('tasks.index')->with('msg', 'Your task have deleted!');
     }
