@@ -5,22 +5,27 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DestroyTask;
 use App\Http\Requests\SaveTask;
 use App\Http\Requests\UpdateTask;
-use App\Task;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Repositories\TaskRepositoryInterface;
+use App\Task;
+use Illuminate\Support\Facades\Auth;
 
 class TasksController extends Controller
 {
+    /**
+     * @var TaskRepositoryInterface
+     */
     private $tasks;
 
+    /**
+     * TasksController constructor.
+     *
+     * @param TaskRepositoryInterface $tasks
+     */
     public function __construct(TaskRepositoryInterface $tasks) {
         $this->tasks = $tasks;
     }
 
     /**
-     * @param Task $task
-     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
@@ -50,7 +55,10 @@ class TasksController extends Controller
      */
     public function store(SaveTask $request)
     {
-        $this->tasks->store($request->all());
+        $this->tasks->store([
+            'name' => $request->name,
+            'user_id' => Auth::user()->id
+        ]);
 
         return redirect()->route('tasks.index')->with('msg', 'Your task have saved!');
     }
@@ -58,8 +66,9 @@ class TasksController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @return void
      */
     public function show($id)
     {
@@ -95,9 +104,11 @@ class TasksController extends Controller
      */
     public function update(UpdateTask $request, Task $task)
     {
-       if ($this->tasks->update($task, $request->all())) {
+        if ($this->tasks->update($task->id, [
+            'name' => $request->name,
+        ])) {
             return redirect()->route('tasks.index')->with('msg', 'Task has updated!');
-       }
+        }
     }
 
     /**
