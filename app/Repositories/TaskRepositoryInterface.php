@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 
 use App\Http\Requests\SaveTask;
+use App\Task;
 
 interface TaskRepositoryInterface {
     /**
@@ -30,4 +31,14 @@ interface TaskRepositoryInterface {
      * @return mixed
      */
     public function find(int $id);
+
+    /**
+     * Update task
+     *
+     * @param Task $task
+     * @param array $newTaskData
+     *
+     * @return mixed
+     */
+    public function update(Task $task, array $newTaskData);
 }

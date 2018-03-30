@@ -15,11 +15,7 @@ class UpdateTask extends FormRequest
      */
     public function authorize()
     {
-        $task = Task::find($this->route('task'));
-
-        return Auth::user()->can('update', $task);
-
-        //return Auth::user()->can('update', $task);
+        return Auth::user()->can('update', $this->route('task'));
     }
 
     /**

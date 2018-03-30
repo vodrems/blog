@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 use App\Http\Requests\SaveTask;
 use App\Task;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TaskRepository implements TaskRepositoryInterface {
@@ -43,5 +44,17 @@ class TaskRepository implements TaskRepositoryInterface {
         $task = Task::findOrFail($id);
 
         return $task;
+    }
+
+    /**
+     * Update task
+     *
+     * @param Task $task
+     * @param array $newTaskData
+     *
+     * @return mixed
+     */
+    public function update(Task $task, array $newTaskData) {
+        return $task->update($newTaskData);
     }
 }

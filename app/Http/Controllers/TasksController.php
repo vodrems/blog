@@ -69,12 +69,12 @@ class TasksController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Task $task
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function edit(int $id)
+    public function edit(Task $task)
     {
-        $task = $this->tasks->find($id);
         if (Auth::user()->can('update', $task)) {
             return view('tasks.edit', [
                 'task' => $task
@@ -88,15 +88,16 @@ class TasksController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateTask $request
+     * @param Task $task
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateTask $request, $id)
+    public function update(UpdateTask $request, Task $task)
     {
-       if ($this->tasks->find($id)->update($request->all())) {
+       if ($this->tasks->update($task, $request->all())) {
             return redirect()->route('tasks.index')->with('msg', 'Task has updated!');
-        }
+       }
     }
 
     /**
