@@ -18,13 +18,15 @@
                         <th>&nbsp;</th>
                     </thead>
 
+                    <div>
+                        <task-list :items="{{ $tasks }}"/>
+                    </div>
+
                     <tbody>
                     @foreach ($tasks as $task)
                         <tr>
                             <td class="table-text">
-                                <div>
-                                    {{ $task->name }}
-                                </div>
+
                             </td>
 
                             <td>

@@ -71,9 +71,9 @@ class TasksController extends Controller
      *
      * @return void
      */
-    public function show($id)
+    public function show(int $id)
     {
-        //
+        dd($this->tasks->find($id));
     }
 
     /**

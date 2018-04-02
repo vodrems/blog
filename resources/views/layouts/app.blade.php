@@ -3,10 +3,11 @@
 <head>
     <title>Todo</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
-<div class="container">
+<div class="container" id="app">
     <nav class="navbar navbar-default">
         <ul>
             @if(!Auth::check())
@@ -35,5 +36,6 @@
         </div>
     </div>
 </div>
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
