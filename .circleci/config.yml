@@ -1,11 +1,8 @@
 version: 2
 
-machine:
-  php:
-    version: 7.01
-
-  post:
-    - php -v
-
-
 jobs:
+  build:
+    docker:
+      - image: circleci/php:7.1-node-browsers
+    steps:
+      - run: php -v
