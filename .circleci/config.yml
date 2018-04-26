@@ -4,8 +4,14 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.1-node-browsers
+
+    working_directory: ~/repo
+
     steps:
       - run: php -v
+      - run: npm -v
+      - checkout
+      - run: npm install
 
 workflows:
   version: 2
