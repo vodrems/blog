@@ -12,5 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
+
+Route::group(['middleware' => ['web', 'auth']], function () {
+    Route::resource('/tasks', 'TasksController');
+});
+
+Route::get('login', 'LoginController@showLoginForm')->name('login');
+Route::post('login', 'LoginController@login')->name('auth');
+Route::get('reg', 'LoginController@showRegForm')->name('regForm');
+Route::post('reg', 'LoginController@reg')->name('reg');
+Route::post('logout', 'LoginController@logout')->name('logout');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/hack', 'LoginController@hack');
